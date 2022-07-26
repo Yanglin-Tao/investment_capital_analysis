@@ -1,0 +1,46 @@
+<h1>Welcome to Capital Analysis</h1>
+<p>Please provide a data frame or upload a .csv file. </p>
+<form id = "myForm" action="/get_plot" method="POST">
+    Year: <input type="number" name = "year_1" required/> Captital: <input type="number" name = "year_1_capital" placeholder="$USD" required/></br>
+    <br>
+    Year: <input type="number" name = "year_2" required/> Captital: <input type="number" name = "year_2_capital" placeholder="$USD" required/></br>
+    <br>
+    Year: <input type="number" name = "year_3" required/> Captital: <input type="number" name = "year_3_capital" placeholder="$USD" required/></br>
+    <br>
+    Year: <input type="number" name = "year_4" required/> Captital: <input type="number" name = "year_4_capital" placeholder="$USD" required/></br>
+    <br>
+    Desired growth rate: <input type="text" name = "desired_growth_rate" required/> <br>
+    <br>
+    <input type="submit" value = OK />
+    <input type="button" onclick="reset()" value="Reset">
+    <br>
+</form>
+
+<script>
+    function reset() {
+      document.getElementById("myForm").reset();
+    }
+    </script>
+<br>
+
+{% if plot_url %}
+    <img src= {{plot_url}} alt = "Chart cannot be displayed">
+{% endif %}
+
+<p>The line chart is plotted based on the following data: </p>
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+<table>
+    <th>Year</th>
+    <th>Capital</th>
+    {% for line in data %}
+        <tr>
+            <td>{{line}}</td>
+            <td>{{data[line]}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
